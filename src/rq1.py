@@ -1,3 +1,4 @@
+import argparse
 import os
 from typing import List
 
@@ -122,22 +123,31 @@ def mean_score_w2v(df, num_features: int):
     )
 
 
-def main():
+def main(out: str):
     df = load_df()
     bow_vectorizer: CountVectorizer = CountVectorizer(
         stop_words="english",
         analyzer="word",
         token_pattern=r"(?u)\b[A-Za-z]{3,}\b",
     )
-    mean_score(df, bow_vectorizer).to_csv("out/rq1/bow.csv")
+    mean_score(df, bow_vectorizer).to_csv("{}/bow.csv".format(out))
     tf_idf_vectorizer: TfidfVectorizer = TfidfVectorizer(
         stop_words="english",
         analyzer="word",
         token_pattern=r"(?u)\b[A-Za-z]{3,}\b",
     )
-    mean_score(df, tf_idf_vectorizer).to_csv("out/rq1/tf_idf.csv")
-    mean_score_w2v(df, 100).to_csv("out/rq1/w2v.csv")
+    mean_score(df, tf_idf_vectorizer).to_csv("{}/tf_idf.csv".format(out))
+    mean_score_w2v(df, 100).to_csv("{}/w2v.csv".format(out))
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Calculate f1-macro, roc-auc")
+    parser.add_argument(
+        "-o",
+        "--out",
+        type=str,
+        default="out/rq1",
+        help="Write output to <dir>(default = './out/rq1')",
+    )
+    args = parser.parse_args()
+    main(args.out)
