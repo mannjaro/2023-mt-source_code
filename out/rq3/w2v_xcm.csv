@@ -1,0 +1,5 @@
+category,precision,recall,f1-score,roc-auc
+add_task,0.191,0.3429,0.2453,0.4122
+condition,0.0,0.0,0.0,0.3947
+edit_var,0.417,0.48,0.4455,0.5582
+template,0.0,0.0,0.0,0.5393

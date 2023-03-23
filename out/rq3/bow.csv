@@ -1,0 +1,4 @@
+Feature,f1_macro,accuracy,roc_auc_ovr
+message,0.448,0.231,0.618
+body,0.301,0.385,0.664
+xcm,0.174,0.308,0.597
